@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -76,12 +75,47 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom warm color palette
+				warm: {
+					50: '#faf9f7',
+					100: '#f5f1eb',
+					200: '#e8e3dd',
+					300: '#d4b896',
+					400: '#c9b491',
+					500: '#b8a082',
+					600: '#a08968',
+					700: '#8b7355',
+					800: '#6b5a47',
+					900: '#4a3f35',
+				},
+				gold: {
+					50: '#fefcf9',
+					100: '#fdf8f0',
+					200: '#f9f0e1',
+					300: '#f2e4c7',
+					400: '#e8d5a3',
+					500: '#d4b896',
+					600: '#c19a7a',
+					700: '#a67d5f',
+					800: '#8b6347',
+					900: '#6b4a35',
 				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			boxShadow: {
+				'warm': '0 4px 20px rgba(184, 160, 130, 0.15)',
+				'warm-lg': '0 10px 40px rgba(184, 160, 130, 0.2)',
+				'warm-xl': '0 20px 60px rgba(184, 160, 130, 0.25)',
+			},
+			backgroundImage: {
+				'warm-gradient': 'linear-gradient(135deg, #f9f7f4 0%, #f5f1eb 100%)',
+				'gold-gradient': 'linear-gradient(135deg, #d4b896 0%, #b8a082 100%)',
+				'primary-gradient': 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 100%)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -139,6 +173,14 @@ export default {
 						opacity: '1',
 						transform: 'scale(1)'
 					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px rgba(184, 160, 130, 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 30px rgba(184, 160, 130, 0.5)'
+					}
 				}
 			},
 			animation: {
@@ -147,7 +189,8 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'slide-in-left': 'slide-in-left 0.8s ease-out',
 				'slide-in-right': 'slide-in-right 0.8s ease-out',
-				'scale-in': 'scale-in 0.6s ease-out'
+				'scale-in': 'scale-in 0.6s ease-out',
+				'glow': 'glow 2s ease-in-out infinite'
 			}
 		}
 	},
