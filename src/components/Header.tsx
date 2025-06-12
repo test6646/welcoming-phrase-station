@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Camera, Instagram, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -79,10 +80,10 @@ const Header = () => {
               <Camera className="w-7 h-7 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-2xl lg:text-3xl font-serif font-bold text-main">
+              <h1 className="text-2xl lg:text-3xl font-primary font-bold text-main">
                 Prit Photo
               </h1>
-              <p className="text-xs text-secondary">Digital Studio</p>
+              <p className="text-xs text-secondary font-secondary">Digital Studio</p>
             </div>
           </div>
 
@@ -93,7 +94,7 @@ const Header = () => {
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item)}
-                  className="text-main hover:text-primary transition-colors duration-300 font-medium text-sm px-4 py-2 hover:bg-accent rounded-none"
+                  className="text-main hover:text-primary transition-colors duration-300 font-secondary font-medium text-sm px-4 py-2 hover:bg-accent rounded-none"
                 >
                   {item.label}
                 </button>
@@ -124,7 +125,7 @@ const Header = () => {
             </Button>
             <Button
               onClick={() => scrollToSection('contact')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 font-secondary font-semibold text-sm transition-all duration-300 hover:scale-105"
               style={{ borderRadius: 0 }}
             >
               Book Session
@@ -173,7 +174,7 @@ const Header = () => {
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item)}
-                className="text-center text-main hover:text-primary transition-colors py-0.5 font-medium text-lg border-b border-border rounded-none w-full"
+                className="text-center text-main hover:text-primary transition-colors py-0.5 font-secondary font-medium text-lg border-b border-border rounded-none w-full"
               >
                 {item.label}
               </button>
@@ -181,7 +182,7 @@ const Header = () => {
             <div className="flex flex-col space-y-4 mt-8 w-full">
               <Button
                 onClick={() => scrollToSection('contact')}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 font-secondary font-semibold"
                 style={{ borderRadius: 0 }}
               >
                 Book Session

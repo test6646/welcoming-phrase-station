@@ -20,12 +20,18 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'luxury': ['Top Luxury', 'Playfair Display', 'serif'],
-				'grafies': ['Grafies', 'Crimson Text', 'serif'],
-				'serif': ['Top Luxury', 'Playfair Display', 'serif'],
-				'sans': ['Inter', 'sans-serif'],
-				'crimson': ['Crimson Text', 'serif'],
-				'poppins': ['Poppins', 'sans-serif'],
+				'primary': 'var(--font-primary)',
+				'secondary': 'var(--font-secondary)',
+				'body': 'var(--font-body)',
+				'accent': 'var(--font-accent)',
+				
+				// Legacy font classes for backward compatibility
+				'luxury': 'var(--font-primary)',
+				'grafies': 'var(--font-secondary)',
+				'serif': 'var(--font-primary)',
+				'sans': 'var(--font-body)',
+				'crimson': 'var(--font-secondary)',
+				'poppins': 'var(--font-accent)',
 			},
 			colors: {
 				border: 'hsl(var(--border))',

@@ -7,6 +7,12 @@
 
 @layer base {
   :root {
+    /* Font Variables - Easy to change globally */
+    --font-primary: 'Top Luxury', 'Playfair Display', serif;
+    --font-secondary: 'Grafies', 'Crimson Text', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Poppins', sans-serif;
+    
     /* Brand Colors */
     --primary-color: #9d8e6d;
     --background-color: #ffffff;
@@ -104,17 +110,51 @@
   body {
     background-color: var(--background-color);
     color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Font Family Classes */
+  .font-primary {
+    font-family: var(--font-primary);
+  }
+
+  .font-secondary {
+    font-family: var(--font-secondary);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-accent {
+    font-family: var(--font-accent);
+  }
+
+  /* Legacy font classes for backward compatibility */
   .font-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
   }
 
   .font-sans {
-    font-family: 'Playfair Display', sans-serif;
+    font-family: var(--font-body);
+  }
+
+  .font-luxury {
+    font-family: var(--font-primary);
+  }
+
+  .font-grafies {
+    font-family: var(--font-secondary);
+  }
+
+  .font-crimson {
+    font-family: var(--font-secondary);
+  }
+
+  .font-poppins {
+    font-family: var(--font-accent);
   }
 
   /* Custom animations */

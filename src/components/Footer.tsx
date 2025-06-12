@@ -18,9 +18,9 @@ const Footer = () => {
             <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/90 flex items-center justify-center border border-primary/20">
               <Camera className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h3 className="text-2xl font-luxury font-bold text-foreground">Prit Photo</h3>
+            <h3 className="text-2xl font-primary font-bold text-foreground">Prit Photo</h3>
           </div>
-          <p className="text-secondary text-base leading-relaxed text-center max-w-md font-sans">
+          <p className="text-secondary text-base leading-relaxed text-center max-w-md font-body">
             Capturing life's precious moments with artistic excellence. Specializing in Indian wedding ceremonies and traditional events.
           </p>
         </div>
@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="border-t border-primary/10 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-6 sm:space-y-0">
             {/* Copyright */}
-            <div className="text-sm text-secondary font-sans">
+            <div className="text-sm text-secondary font-body">
               © {currentYear} Prit Photo. All rights reserved.
             </div>
 
@@ -70,7 +70,7 @@ const Footer = () => {
             </div>
 
             {/* Tagline */}
-            <div className="text-sm text-secondary font-grafies">
+            <div className="text-sm text-secondary font-secondary">
               Designed with <span className="text-primary">♥</span> for capturing love stories
             </div>
           </div>
