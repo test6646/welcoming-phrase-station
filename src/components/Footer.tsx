@@ -18,7 +18,7 @@ const Footer = () => {
             <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/90 flex items-center justify-center border border-primary/20">
               <Camera className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h3 className="text-2xl font-luxury font-bold text-main">Prit Photo</h3>
+            <h3 className="text-2xl font-luxury font-bold text-foreground">Prit Photo</h3>
           </div>
           <p className="text-secondary text-base leading-relaxed text-center max-w-md font-sans">
             Capturing life's precious moments with artistic excellence. Specializing in Indian wedding ceremonies and traditional events.
@@ -66,7 +66,7 @@ const Footer = () => {
                 aria-label="Back to top"
               >
                 <ArrowUp className="w-6 h-6" />
-              </a>
+              </button>
             </div>
 
             {/* Tagline */}
