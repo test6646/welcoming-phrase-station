@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
@@ -61,7 +62,7 @@ const Hero = () => {
 
       {/* Main Hashtag */}
       <div className="absolute bottom-28 sm:bottom-20 md:bottom-32 left-0 right-0 z-10 text-center text-white px-4 sm:px-6 w-full max-w-6xl mx-auto">
-        <h1 className="text-[3.5vh] sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-serif font-bold leading-tight text-white break-words">
+        <h1 className="text-[3.5vh] sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-luxury font-bold leading-tight text-white break-words">
           #AJourneyOfLoveByPritPhoto
         </h1>
       </div>

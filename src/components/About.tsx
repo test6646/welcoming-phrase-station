@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Award, Camera, Users, Star } from 'lucide-react';
 
@@ -27,7 +28,7 @@ const About = () => {
           <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
             About Us
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-main mb-4 sm:mb-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-luxury font-bold text-main mb-4 sm:mb-6 text-center">
             Our Studio Story
           </h2>
         </div>
@@ -44,10 +45,10 @@ const About = () => {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-serif font-bold text-main mb-3">
+                <h3 className="text-xl font-grafies font-bold text-main mb-3">
                   Our Journey to Excellence
                 </h3>
-                <p className="text-secondary text-sm leading-relaxed">
+                <p className="text-secondary text-sm leading-relaxed font-sans">
                   Prit Photo has been capturing timeless moments for over 8 years. Our award-winning work reflects our passion for photography, blending creativity with tradition to create memories that last a lifetime.
                 </p>
               </div>
@@ -56,7 +57,7 @@ const About = () => {
 
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-card p-8 shadow-xl hover:shadow-2xl transition-all duration-300 group border border-primary/10" style={{ borderRadius: 0 }}>
-              <h3 className="text-xl font-serif font-bold text-main mb-6 text-center">
+              <h3 className="text-xl font-grafies font-bold text-main mb-6 text-center">
                 Founders
               </h3>
               <div className="flex flex-row gap-6 justify-between">
@@ -75,7 +76,7 @@ const About = () => {
                         <Camera className="w-5 h-5" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-serif font-bold text-main">
+                    <h3 className="text-lg font-grafies font-bold text-main">
                       {owner.name}
                     </h3>
                   </div>
@@ -93,10 +94,10 @@ const About = () => {
                   <div className="text-primary mb-2">
                     <achievement.icon className="w-7 h-7 mx-auto" />
                   </div>
-                  <div className="text-2xl font-bold text-main mb-2">
+                  <div className="text-2xl font-bold text-main mb-2 font-luxury">
                     {achievement.number}
                   </div>
-                  <p className="text-secondary text-sm">
+                  <p className="text-secondary text-sm font-sans">
                     {achievement.label}
                   </p>
                 </div>

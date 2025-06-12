@@ -20,7 +20,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'serif': ['Playfair Display', 'serif'],
+				'luxury': ['Top Luxury', 'Playfair Display', 'serif'],
+				'grafies': ['Grafies', 'Crimson Text', 'serif'],
+				'serif': ['Top Luxury', 'Playfair Display', 'serif'],
 				'sans': ['Inter', 'sans-serif'],
 				'crimson': ['Crimson Text', 'serif'],
 				'poppins': ['Poppins', 'sans-serif'],
