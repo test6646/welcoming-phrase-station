@@ -4,9 +4,9 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const mobileImages = [
-    'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80',
-    'https://images.unsplash.com/photo-1560253023-3ec0d77a7a67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80',
-    'https://images.unsplash.com/photo-1519227357096-0cd84f2548e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80',
+    '/images/hero/01.jpg',
+    '/images/hero/02.jpg',
+    '/images/hero/03.jpg',
   ];
 
   const desktopImages = [

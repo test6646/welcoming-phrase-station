@@ -1,209 +1,224 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Carousel3D = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   const nextSlide = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev + 1) % slides.length);
-  }, [slides.length]);
+    setTimeout(() => setIsTransitioning(false), 650);
+  }, [slides.length, isTransitioning]);
 
+  const prevSlide = useCallback(() => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+    setTimeout(() => setIsTransitioning(false), 650);
+  }, [slides.length, isTransitioning]);
+
+  // Auto-slide every 3 seconds
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(nextSlide, 2500);
+    if (isTransitioning) return;
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
+  }, [nextSlide, isTransitioning]);
 
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-    setIsAutoPlaying(false);
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current || isTransitioning) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  const slideVariants = {
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      zIndex: 10,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        opacity: { duration: 0.5 },
+        scale: { duration: 0.8 }
+      },
+    },
+    left: {
+      x: '-55%',
+      opacity: 0.5,
+      scale: 0.85,
+      zIndex: 5,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        opacity: { duration: 0.5 },
+        scale: { duration: 0.8 }
+      },
+    },
+    right: {
+      x: '55%',
+      opacity: 0.5,
+      scale: 0.85,
+      zIndex: 5,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        opacity: { duration: 0.5 },
+        scale: { duration: 0.8 }
+      },
+    },
+    hidden: {
+      x: '100%',
+      opacity: 0,
+      scale: 0.85,
+      zIndex: 0,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        opacity: { duration: 0.4 }
+      },
+    },
   };
 
   const getSlidePosition = (index) => {
-    const diff = index - currentIndex;
-    const totalSlides = slides.length;
-    let normalizedDiff = diff;
-    if (Math.abs(diff) > totalSlides / 2) {
-      normalizedDiff = diff > 0 ? diff - totalSlides : diff + totalSlides;
-    }
-    return normalizedDiff;
+    if (index === currentIndex) return 'center';
+    if (index === (currentIndex - 1 + slides.length) % slides.length) return 'left';
+    if (index === (currentIndex + 1) % slides.length) return 'right';
+    return 'hidden';
   };
 
   return (
     <div
-      className="relative w-full max-w-6xl mx-auto"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
+      className="relative w-full max-w-6xl mx-auto select-none"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      <style>
-        {`
-          .fade-mask-right {
-            mask-image: linear-gradient(to right, transparent, black 30%, black 70%, transparent);
-          }
-          .fade-mask-left {
-            mask-image: linear-gradient(to left, transparent, black 30%, black 70%, transparent);
-          }
-        `}
-      </style>
-
       {/* Desktop Carousel */}
       <div className="hidden md:block">
-        <div className="relative h-[640px] lg:h-[720px] xl:h-[800px] overflow-visible">
-          <div className="absolute inset-0 flex items-center justify-center perspective-1000">
-            {slides.map((slide, index) => {
-              const position = getSlidePosition(index);
-              const isActive = index === currentIndex;
-
-              if (Math.abs(position) > 1) return null;
-
-              let transform = '';
-              let zIndex = 1;
-              let scale = 0.9;
-              let maskClass = '';
-
-              if (position === 0) {
-                transform = 'translateX(0%) translateZ(100px) rotateY(0deg)';
-                zIndex = 10;
-                scale = 1;
-              } else if (position === 1) {
-                transform = `translateX(50%) translateZ(-50px) rotateY(-20deg)`;
-                zIndex = 5;
-                scale = 0.75;
-                maskClass = 'fade-mask-right';
-              } else if (position === -1) {
-                transform = `translateX(-50%) translateZ(-50px) rotateY(20deg)`;
-                zIndex = 5;
-                scale = 0.75;
-                maskClass = 'fade-mask-left';
-              }
-
-              return (
-                <div
-                  key={index}
-                  className={`absolute transition-all duration-600 ease-in-out cursor-pointer w-[45vw] max-w-[780px] min-w-[450px] ${maskClass}`}
-                  style={{
-                    transform: `${transform} scale(${scale})`,
-                    zIndex,
-                    transformStyle: 'preserve-3d',
-                    willChange: 'transform, opacity',
-                  }}
-                  onClick={() => !isActive && goToSlide(index)}
-                >
-                  <div className="bg-white border border-primary/10 rounded-xl overflow-hidden shadow-2xl">
+        <div className="relative h-[520px] lg:h-[580px] xl:h-[640px] overflow-hidden perspective-1000">
+          <AnimatePresence initial={false} mode="sync">
+            {slides.map((slide, index) => (
+              <motion.div
+                key={index}
+                className="absolute inset-0 flex items-center justify-center"
+                variants={slideVariants}
+                initial="hidden"
+                animate={getSlidePosition(index)}
+                style={{ willChange: 'transform' }}
+              >
+                <div className="w-[50vw] max-w-[800px] min-w-[480px]">
+                  <div className="bg-card border border-primary/10 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
                     <div className="relative aspect-[16/9]">
                       <picture>
                         <source media="(max-width: 640px)" srcSet={slide.mobileSrc} />
                         <img
                           src={slide.desktopSrc}
                           alt={slide.title}
-                          className="w-full h-full object-cover"
-                          loading={isActive ? 'eager' : 'lazy'}
+                          className="w-full h-full object-cover rounded-none"
+                          loading="eager"
                         />
                       </picture>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     </div>
-                    {isActive && (
-                      <div className="p-8 space-y-4">
-                        <h3 className="font-serif font-bold text-gray-800 text-3xl">
+                    {getSlidePosition(index) === 'center' && (
+                      <motion.div 
+                        className="p-6 flex items-center justify-between"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <h3 className="font-serif font-bold text-main text-xl sm:text-2xl">
                           {slide.title}
                         </h3>
-                        <Button
-                          variant="outline"
-                          className="w-full border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 text-lg py-6"
+                        <button
+                          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
                         >
                           {slide.button}
-                        </Button>
-                      </div>
+                        </button>
+                      </motion.div>
                     )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
 
       {/* Mobile Carousel */}
       <div className="block md:hidden">
-        <div className="relative h-[480px] overflow-visible px-4">
-          <div className="flex items-center justify-center gap-2 h-full perspective-800">
-            {slides.map((slide, index) => {
-              const position = getSlidePosition(index);
-              const isActive = index === currentIndex;
-
-              if (Math.abs(position) > 1) return null;
-
-              let scale = 0.55;
-              let zIndex = 1;
-              let maskClass = '';
-
-              if (position === 0) {
-                scale = 0.9;
-                zIndex = 10;
-              } else if (position === 1) {
-                scale = 0.75;
-                zIndex = 5;
-                maskClass = 'fade-mask-right';
-              } else if (position === -1) {
-                scale = 0.75;
-                zIndex = 5;
-                maskClass = 'fade-mask-left';
-              }
-
-              return (
-                <div
-                  key={index}
-                  className={`absolute transition-all duration-500 ease-in-out cursor-pointer w-[80vw] max-w-[320px] ${maskClass}`}
-                  style={{
-                    transform: `translateX(${position * 40}%) scale(${scale})`,
-                    zIndex,
-                    willChange: 'transform, opacity',
-                  }}
-                  onClick={() => !isActive && goToSlide(index)}
-                >
-                  <div className="bg-white border border-primary/10 rounded-xl overflow-hidden shadow-xl">
-                    <div className="relative aspect-[4/5]">
+        <div className="relative h-[420px] overflow-hidden px-4 perspective-1000">
+          <AnimatePresence initial={false} mode="sync">
+            {slides.map((slide, index) => (
+              <motion.div
+                key={index}
+                className="absolute inset-0 flex items-center justify-center"
+                variants={slideVariants}
+                initial="hidden"
+                animate={getSlidePosition(index)}
+                style={{ willChange: 'transform' }}
+              >
+                <div className="w-[80vw] max-w-[340px]">
+                  <div className="bg-card border border-primary/10 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
+                    <div className="relative aspect-[4/4]">
                       <img
                         src={slide.mobileSrc}
                         alt={slide.title}
-                        className="w-full h-full object-cover"
-                        loading={isActive ? 'eager' : 'lazy'}
+                        className="w-full h-full object-cover rounded-none"
+                        loading="eager"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     </div>
-                    {isActive && (
-                      <div className="p-6 space-y-4">
-                        <h3 className="font-serif font-bold text-gray-800 text-2xl">
+                    {getSlidePosition(index) === 'center' && (
+                      <motion.div 
+                        className="p-4 text-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <h3 className="font-serif font-bold text-main text-lg mb-3">
                           {slide.title}
                         </h3>
-                        <Button
-                          variant="outline"
-                          className="w-full border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 text-base py-5"
+                        <button
+                          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
                         >
                           {slide.button}
-                        </Button>
-                      </div>
+                        </button>
+                      </motion.div>
                     )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
-      </div>
-
-      {/* Dots Indicator */}
-      <div className="flex justify-center mt-8 space-x-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-white w-12' : 'bg-white/40'
-            }`}
-          />
-        ))}
       </div>
     </div>
   );
@@ -214,51 +229,70 @@ const Portfolio = () => {
     {
       title: 'Traditional Wedding',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+      desktopSrc:
+        'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
     },
     {
       title: 'Pre-Wedding Romance',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+      desktopSrc:
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
     },
     {
-      title: 'Mehendi Ceremony',
+      title: 'Mehndi Ceremony',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+      desktopSrc:
+        'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
     },
     {
       title: 'Kids Portrait',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+      desktopSrc:
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
     },
     {
       title: 'Portrait Session',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+      desktopSrc:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
     },
     {
       title: 'Wedding Couple',
       button: 'View Gallery',
-      desktopSrc: 'https://images.unsplash.com/photo-158333900-3579-d0e730-3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
-      mobileSrc: 'https://images.unsplash.com/photo-158333900-3579-d0e730-3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
-    }
+      desktopSrc:
+        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80',
+      mobileSrc:
+        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=960&h=1200&q=80',
+    },
   ];
 
   return (
     <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center mb-8 sm:mb-12">
-          <span className="inline-block bg-white/30 text-white font-semibold text-xs sm:text-sm uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-accent/20 text-primary-foreground font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
             Our Portfolio
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white mb-4">
-            Moments by <span className="text-white/80">Prit Photo</span>
+          <motion.div
+          className="text-center mb-10 sm:mb-12 lg:mb-16"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-main mb-4 sm:mb-6">
+            Moments By Prit Photo
           </h2>
+        </motion.div>
         </div>
         <Carousel3D slides={portfolioSlides} />
       </div>

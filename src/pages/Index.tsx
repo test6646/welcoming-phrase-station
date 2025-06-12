@@ -8,7 +8,6 @@ import Portfolio from '../components/Portfolio';
 import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import ScrollToTop from '../components/ScrollToTop';
 
 const Index = () => {
   return (
@@ -51,7 +50,6 @@ const Index = () => {
 
       {/* Footer */}
       <Footer />
-      <ScrollToTop />
     </div>
   );
 };

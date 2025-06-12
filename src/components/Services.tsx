@@ -3,86 +3,122 @@ import { motion } from 'framer-motion';
 import {
   Camera,
   Heart,
-  IndianRupee,
+  Sparkles,
   Baby,
   Gem,
   UserRound,
 } from 'lucide-react';
 
-const Services = () => {
-  const [activeService, setActiveService] = useState('wedding');
+const Services: React.FC = () => {
+  const [activeService, setActiveService] = useState<string>('wedding');
 
   const services = [
     {
       id: 'wedding',
       title: 'Wedding Photography',
       icon: Camera,
-      heroImage: 'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=800&h=400&q=80',
-      heroImageSmall: 'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=500&h=250&q=80',
+      heroImage:
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1511285605577-4d62fb50d2b7?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1505233528-7f43913a47a6?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1511285605577-4d62fb50d2b7?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1505233528-7f43913a47a6?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1511285605577-4d62fb50d2b7?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
     {
       id: 'prewedding',
       title: 'Pre-Wedding Shoots',
       icon: Heart,
-      heroImage: 'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=800&h=400&q=80',
-      heroImageSmall: 'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=500&h=250&q=80',
+      heroImage:
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
     {
       id: 'traditional',
       title: 'Traditional Ceremonies',
-      icon: IndianRupee,
-      heroImage: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9',
-      heroImageSmall: 'https://images.unsplash.com/photo-1571055135623-f1ab99f76c2b?auto=format&fit=crop&w=500&h=250&q=80',
+      icon: Sparkles,
+      heroImage:
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1571055135623-f1ab99f76c2b?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1571055135623-f1ab99f76c2b?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1571055135623-f1ab99f76c2b?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1571055135623-f1ab99f76c2b?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
     {
       id: 'kids',
       title: 'Kids Photography',
       icon: Baby,
-      heroImage: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9',
-      heroImageSmall: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&h=250&q=80',
+      heroImage:
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
     {
       id: 'ring',
       title: 'Ring Ceremony',
       icon: Gem,
-      heroImage: 'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=800&h=400&q=80',
-      heroImageSmall: 'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=500&h=250&q=80',
+      heroImage:
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519741497674-411a9c4091c8?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
     {
       id: 'portrait',
       title: 'Portrait Photography',
       icon: UserRound,
-      heroImage: 'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=800&h=400&q=80',
-      heroImageSmall: 'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=500&h=250&q=80',
+      heroImage:
+        'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=800&h=450&q=80',
+      heroImageSmall:
+        'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=500&h=281&q=80',
       images: [
-        'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=400&h=600&q=60',
-        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=300&h=300&q=60',
-        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=300&h=300&q=60',
+        'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=337&q=60',
+        'https://images.unsplash.com/photo-1519227357-2b34e0b7026b?auto=format&fit=crop&w=600&h=337&q=60',
+      ],
+      mobileImages: [
+        'https://images.unsplash.com/photo-1506794778202-36a4277b4a2a?auto=format&fit=crop&w=600&h=1066&q=60',
+        'https://images.unsplash.com/photo-1511285560929-80b456feabc1?auto=format&fit=crop&w=600&h=1066&q=60',
       ],
     },
   ];
@@ -107,7 +143,7 @@ const Services = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4">
+          <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-sm uppercase tracking-wider px-4 py-2 mb-4">
             Our Services
           </span>
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-main dark:text-text-primary mb-6">
@@ -115,24 +151,24 @@ const Services = () => {
           </h2>
         </motion.div>
 
-        <div className="bg-card dark:bg-card glass-effect rounded-2xl shadow-lg overflow-hidden border border-border">
+        <div className="bg-primary dark:bg-card glass-effect shadow-lg overflow-hidden border border-border">
           {/* Mobile Dropdown */}
           <div className="block sm:hidden p-6">
             <select
               value={activeService}
               onChange={(e) => setActiveService(e.target.value)}
-              className="w-full p-4 rounded-lg bg-card dark:bg-card text-main dark:text-text-primary border border-border focus:outline-none focus:ring-2 focus:ring-primary text-lg shadow-sm appearance-none cursor-pointer hover:bg-primary/5 transition-colors duration-200"
+              className="w-full p-4 bg-card dark:bg-card text-main dark:text-text-primary border border-border focus:outline-none focus:ring-2 focus:ring-primary text-lg shadow-sm appearance-none cursor-pointer hover:bg-primary/5 transition-colors duration-200"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                 backgroundPosition: 'right 0.5rem center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '1.5em 1.5em',
-                paddingRight: '2.5rem'
+                paddingRight: '2.5rem',
               }}
             >
               {services.map((service) => (
-                <option 
-                  key={service.id} 
+                <option
+                  key={service.id}
                   value={service.id}
                   className="bg-card dark:bg-card text-main dark:text-text-primary py-3"
                 >
@@ -152,7 +188,7 @@ const Services = () => {
                     <motion.button
                       key={service.id}
                       onClick={() => setActiveService(service.id)}
-                      className={`w-full text-left p-4 rounded-lg flex items-center gap-3 transition-all duration-300 ${
+                      className={`w-full text-left p-4 flex items-center gap-3 transition-all duration-300 ${
                         activeService === service.id
                           ? 'bg-primary text-primary-foreground shadow-md'
                           : 'text-main dark:text-text-primary hover:bg-primary/10'
@@ -162,9 +198,11 @@ const Services = () => {
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ scale: 1.01 }}
                     >
-                      <div className={`p-2 rounded-md ${
-                        activeService === service.id ? 'bg-primary-foreground/20' : 'bg-primary/10'
-                      }`}>
+                      <div
+                        className={`p-2 ${
+                          activeService === service.id ? 'bg-primary-foreground/20' : 'bg-primary/10'
+                        }`}
+                      >
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <span className="font-sans font-medium text-base">{service.title}</span>
@@ -189,15 +227,15 @@ const Services = () => {
                       srcSet={`${activeServiceData.heroImageSmall} 500w, ${activeServiceData.heroImage} 800w`}
                       sizes="(max-width: 640px) 500px, 800px"
                       alt={`${activeServiceData.title} Hero`}
-                      className="w-full h-auto object-cover rounded-lg shadow-md hover-lift max-h-[280px]"
+                      className="w-full h-auto object-cover shadow-md hover-lift max-h-[280px]"
                     />
                   </motion.div>
 
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="flex gap-4 justify-between">
                     {activeServiceData.images.map((image, index) => (
                       <motion.div
                         key={`${activeService}-${index}`}
-                        className="relative w-full aspect-[4/3]"
+                        className="relative w-[32%] aspect-[16/9]"
                         variants={imageVariants}
                         initial="initial"
                         animate="animate"
@@ -206,7 +244,7 @@ const Services = () => {
                         <img
                           src={image}
                           alt={`${activeServiceData.title} ${index + 1}`}
-                          className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-md hover-lift"
+                          className="absolute inset-0 w-full h-full object-cover shadow-md hover-lift"
                         />
                       </motion.div>
                     ))}
@@ -220,27 +258,29 @@ const Services = () => {
           <div className="block sm:hidden p-6">
             {activeServiceData && (
               <div className="flex flex-col space-y-4">
-                {/* Large Image - 9:16 ratio */}
+                {/* Large Image - 16:9 ratio (horizontal) */}
                 <motion.div
-                  className="w-full aspect-[9/16]"
+                  className="w-full aspect-[16/9]"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                   key={`${activeService}-main`}
                 >
                   <img
-                    src={activeServiceData.images[0]}
+                    src={activeServiceData.heroImage}
+                    srcSet={`${activeServiceData.heroImageSmall} 500w, ${activeServiceData.heroImage} 800w`}
+                    sizes="(max-width: 640px) 500px, 800px"
                     alt={`${activeServiceData.title} Main`}
-                    className="w-full h-full object-cover rounded-lg shadow-md"
+                    className="w-full h-full object-cover shadow-md"
                   />
                 </motion.div>
 
-                {/* Two smaller images below - 50% size each */}
-                <div className="grid grid-cols-2 gap-3">
-                  {activeServiceData.images.slice(1, 3).map((image, index) => (
+                {/* Two smaller images below - 9:16 ratio, larger size */}
+                <div className="grid grid-cols-2 gap-4">
+                  {activeServiceData.mobileImages.map((image, index) => (
                     <motion.div
                       key={`${activeService}-small-${index}`}
-                      className="relative w-full aspect-square"
+                      className="relative w-full aspect-[9/16]"
                       variants={imageVariants}
                       initial="initial"
                       animate="animate"
@@ -248,8 +288,8 @@ const Services = () => {
                     >
                       <img
                         src={image}
-                        alt={`${activeServiceData.title} ${index + 2}`}
-                        className="w-full h-full object-cover rounded-lg shadow-md"
+                        alt={`${activeServiceData.title} ${index + 1}`}
+                        className="w-full h-full object-cover shadow-md"
                       />
                     </motion.div>
                   ))}

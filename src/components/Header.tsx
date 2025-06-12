@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Camera, Instagram } from 'lucide-react';
+import { Menu, X, Camera, Instagram, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+  }, [isDarkTheme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +27,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -40,7 +50,7 @@ const Header = () => {
     { label: 'Contact', href: 'contact', type: 'scroll' },
   ];
 
-  const handleNavClick = (item: any) => {
+  const handleNavClick = (item) => {
     if (item.type === 'navigate') {
       handleEventsClick();
     } else {
@@ -48,104 +58,134 @@ const Header = () => {
     }
   };
 
+  const toggleTheme = () => {
+    setIsDarkTheme((prev) => !prev);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 shadow-lg backdrop-blur-sm'
-          : 'bg-gradient-to-b from-white/95 to-white/80 backdrop-blur-md'
+        isScrolled ? 'bg-card shadow-lg' : 'bg-card'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
           <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center rounded-xl shadow-md">
-              <Camera className="w-7 h-7 text-white" />
+            <div
+              className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md"
+              style={{ borderRadius: 0 }}
+            >
+              <Camera className="w-7 h-7 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
+              <h1 className="text-2xl lg:text-3xl font-serif font-bold text-main">
                 Prit Photo
               </h1>
-              <p className="text-xs text-gray-500">Digital Studio</p>
+              <p className="text-xs text-secondary">Digital Studio</p>
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center space-x-2">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleNavClick(item)}
-                className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium text-sm px-4 py-2 rounded-lg hover:bg-primary/10"
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* Right Side Actions */}
+          {/* Desktop Navigation and Buttons */}
           <div className="hidden xl:flex items-center space-x-3">
+            <nav className="flex items-center space-x-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => handleNavClick(item)}
+                  className="text-main hover:text-primary transition-colors duration-300 font-medium text-sm px-4 py-2 hover:bg-accent rounded-none"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => window.open('https://instagram.com/prit_digital_photo', '_blank')}
-              className="text-gray-700 hover:text-primary p-3 rounded-xl"
+              className="text-main hover:text-primary p-3 hover:bg-accent"
+              style={{ borderRadius: 0 }}
             >
               <Instagram className="w-5 h-5" />
             </Button>
             <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="text-main hover:text-primary p-3 hover:bg-accent"
+              style={{ borderRadius: 0 }}
+              aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+            >
+              {isDarkTheme ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </Button>
+            <Button
               onClick={() => scrollToSection('contact')}
-              className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105"
+              style={{ borderRadius: 0 }}
             >
               Book Session
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="xl:hidden text-gray-700 p-3 z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </Button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="xl:hidden fixed inset-0 top-20 bg-white/95 backdrop-blur-md z-40">
-            <nav className="flex flex-col py-8 px-6 space-y-4 h-full">
-              {navItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => handleNavClick(item)}
-                  className="text-left text-gray-700 hover:text-primary transition-colors py-3 font-medium text-lg border-b border-gray-100"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <div className="flex flex-col space-y-4 mt-8">
-                <Button
-                  variant="outline"
-                  onClick={() => window.open('https://instagram.com/prit_digital_photo', '_blank')}
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-white py-4 rounded-xl"
-                >
-                  <Instagram className="w-5 h-5 mr-2" />
-                  Follow Us
-                </Button>
-                <Button
-                  onClick={() => scrollToSection('contact')}
-                  className="w-full bg-primary hover:bg-primary/90 text-white py-4 rounded-xl"
-                >
-                  Book Session
-                </Button>
-              </div>
-            </nav>
+          {/* Mobile Buttons */}
+          <div className="flex items-center space-x-2 xl:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => window.open('https://instagram.com/prit_digital_photo', '_blank')}
+              className="text-main hover:text-primary p-3 hover:bg-accent"
+              style={{ borderRadius: 0 }}
+            >
+              <Instagram className="w-5 h-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="text-main hover:text-primary p-3 hover:bg-accent"
+              style={{ borderRadius: 0 }}
+              aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+            >
+              {isDarkTheme ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-main p-3 z-[60]"
+              style={{ borderRadius: 0 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="xl:hidden fixed inset-0 top-20 bg-card z-40">
+          <nav className="flex flex-col py-8 px-6 space-y-4 h-full">
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item)}
+                className="text-left text-main hover:text-primary transition-colors py-0.5 font-medium text-lg border-b border-border rounded-none"
+              >
+                {item.label}
+              </button>
+            ))}
+            <div className="flex flex-col space-y-4 mt-8">
+              <Button
+                onClick={() => scrollToSection('contact')}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4"
+                style={{ borderRadius: 0 }}
+              >
+                Book Session
+              </Button>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

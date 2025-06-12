@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Testimonials: React.FC = () => {
+const Testimonials = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const testimonials = [
@@ -27,7 +27,7 @@ const Testimonials: React.FC = () => {
       name: 'Sneha Patel',
       location: 'Ahmedabad',
       rating: 5,
-      text: 'Amazing work on our traditional ceremonies! They understood the cultural significance of each ritual and captured them beautifully. The mehendi photos are absolutely stunning.',
+      text: 'Amazing work on our traditional ceremonies! They understood the cultural significance of each ritual and captured them beautifully. The mehndi photos are absolutely stunning.',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
       event: 'Traditional Ceremonies',
     },
@@ -53,11 +53,9 @@ const Testimonials: React.FC = () => {
     const timer = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 4000);
-
     return () => clearInterval(timer);
   }, [testimonials.length]);
 
-  // Animation variants
   const slideVariants = {
     enter: { x: '100%', opacity: 0 },
     center: { x: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
@@ -70,7 +68,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="py-12 sm:py-16 lg:py-20 bg-accent-light dark:bg-accent-light">
+    <section id="testimonials" className="py-16 sm:py-16 lg:py-20 bg-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -79,20 +77,17 @@ const Testimonials: React.FC = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 rounded-full mb-4 sm:mb-6">
+          <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 sm:mb-6">
             Client Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-main dark:text-text-primary mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-main mb-4 sm:mb-6">
             What Our Clients Say
           </h2>
-          <p className="text-secondary dark:text-text-secondary text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-            Discover the experiences of our satisfied clients who trusted Prit Digital Studio to capture their most cherished moments.
-          </p>
         </motion.div>
 
         {/* Testimonial Carousel */}
         <div className="relative max-w-4xl sm:max-w-5xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative overflow-hidden">
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={currentTestimonial}
@@ -103,13 +98,13 @@ const Testimonials: React.FC = () => {
                 exit="exit"
               >
                 <motion.div
-                  className="bg-card dark:bg-card glass-effect rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg text-center relative border border-border"
+                  className="bg-card glass-effect p-8 sm:p-10 lg:p-12 text-center relative border border-primary/10 shadow-lg"
                   variants={cardVariants}
                   initial="initial"
                   animate="animate"
                 >
                   {/* Quote Icon */}
-                  <div className="absolute top-4 sm:top-6 left-4 sm:left-6 text-primary/20 dark:text-primary/20 hidden sm:block">
+                  <div className="absolute top-6 sm:top-8 left-6 sm:left-8 text-primary/20 hidden sm:block">
                     <Quote className="w-8 h-8 sm:w-10 sm:h-10" />
                   </div>
 
@@ -128,7 +123,7 @@ const Testimonials: React.FC = () => {
                   </div>
 
                   {/* Testimonial Text */}
-                  <blockquote className="text-sm sm:text-base lg:text-lg text-main dark:text-text-primary mb-6 sm:mb-8 leading-relaxed font-sans max-w-2xl sm:max-w-3xl mx-auto">
+                  <blockquote className="text-sm sm:text-base lg:text-lg text-main mb-6 sm:mb-8 leading-relaxed font-sans max-w-2xl sm:max-w-3xl mx-auto">
                     "{testimonials[currentTestimonial].text}"
                   </blockquote>
 
@@ -137,19 +132,19 @@ const Testimonials: React.FC = () => {
                     <motion.img
                       src={testimonials[currentTestimonial].image}
                       alt={testimonials[currentTestimonial].name}
-                      className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full object-cover border-2 border-primary/30 dark:border-primary/30"
+                      className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-cover border-2 border-primary/30 rounded-none"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.4 }}
                     />
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold text-main dark:text-text-primary text-sm sm:text-base">
+                      <div className="font-semibold text-main text-sm sm:text-base">
                         {testimonials[currentTestimonial].name}
                       </div>
-                      <div className="text-xs sm:text-sm text-secondary dark:text-text-secondary">
+                      <div className="text-xs sm:text-sm text-secondary">
                         {testimonials[currentTestimonial].location}
                       </div>
-                      <div className="text-xs sm:text-sm text-primary dark:text-primary font-medium mt-1">
+                      <div className="text-xs sm:text-sm text-primary font-medium mt-1">
                         {testimonials[currentTestimonial].event}
                       </div>
                     </div>
@@ -158,24 +153,7 @@ const Testimonials: React.FC = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center space-x-2 mt-6 sm:mt-8">
-            {testimonials.map((_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => setCurrentTestimonial(index)}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                  index === currentTestimonial ? 'bg-primary scale-110 sm:scale-125' : 'bg-primary/30 hover:bg-primary/50'
-                }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
-
       </div>
     </section>
   );
