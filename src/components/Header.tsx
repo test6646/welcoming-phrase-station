@@ -70,7 +70,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo */}
+          {/* Logo Group */}
           <div className="flex items-center space-x-4">
             <div
               className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md"
@@ -86,8 +86,8 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Desktop Navigation and Buttons */}
-          <div className="hidden xl:flex items-center space-x-3">
+          {/* Desktop Navigation Group */}
+          <div className="hidden xl:flex items-center justify-center flex-grow">
             <nav className="flex items-center space-x-2">
               {navItems.map((item) => (
                 <button
@@ -99,6 +99,10 @@ const Header = () => {
                 </button>
               ))}
             </nav>
+          </div>
+
+          {/* Buttons Group */}
+          <div className="hidden xl:flex items-center space-x-2">
             <Button
               variant="ghost"
               size="sm"
@@ -164,17 +168,17 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="xl:hidden fixed inset-0 top-20 bg-card z-40">
-          <nav className="flex flex-col py-8 px-6 space-y-4 h-full">
+          <nav className="flex flex-col items-center justify-center py-8 px-6 space-y-4 h-full">
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item)}
-                className="text-left text-main hover:text-primary transition-colors py-0.5 font-medium text-lg border-b border-border rounded-none"
+                className="text-center text-main hover:text-primary transition-colors py-0.5 font-medium text-lg border-b border-border rounded-none w-full"
               >
                 {item.label}
               </button>
             ))}
-            <div className="flex flex-col space-y-4 mt-8">
+            <div className="flex flex-col space-y-4 mt-8 w-full">
               <Button
                 onClick={() => scrollToSection('contact')}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4"
