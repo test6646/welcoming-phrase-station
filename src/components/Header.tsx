@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Camera, Instagram, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -66,24 +65,21 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-card shadow-lg' : 'bg-card'
+        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg border-b border-border' : 'bg-background/90 backdrop-blur-sm'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo Group */}
           <div className="flex items-center space-x-4">
-            <div
-              className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md"
-              style={{ borderRadius: 0 }}
-            >
-              <Camera className="w-7 h-7 text-primary-foreground" />
+            <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md">
+              <Camera className="w-7 h-7 text-white" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-2xl lg:text-3xl font-primary font-bold text-main">
+              <h1 className="text-2xl lg:text-3xl font-primary font-bold text-foreground">
                 Prit Photo
               </h1>
-              <p className="text-xs text-secondary font-secondary">Digital Studio</p>
+              <p className="text-xs text-muted-foreground font-secondary">Digital Studio</p>
             </div>
           </div>
 
@@ -94,7 +90,7 @@ const Header = () => {
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item)}
-                  className="text-main hover:text-primary transition-colors duration-300 font-secondary font-medium text-sm px-4 py-2 hover:bg-accent rounded-none"
+                  className="text-foreground hover:text-primary transition-colors duration-300 font-secondary font-medium text-sm px-4 py-2 hover:bg-accent rounded-none"
                 >
                   {item.label}
                 </button>
@@ -108,7 +104,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={() => window.open('https://instagram.com/prit_digital_photo', '_blank')}
-              className="text-main hover:text-primary p-3 hover:bg-accent"
+              className="text-foreground hover:text-primary p-3 hover:bg-accent"
               style={{ borderRadius: 0 }}
             >
               <Instagram className="w-5 h-5" />
@@ -117,7 +113,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="text-main hover:text-primary p-3 hover:bg-accent"
+              className="text-foreground hover:text-primary p-3 hover:bg-accent"
               style={{ borderRadius: 0 }}
               aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
             >
@@ -125,7 +121,7 @@ const Header = () => {
             </Button>
             <Button
               onClick={() => scrollToSection('contact')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 font-secondary font-semibold text-sm transition-all duration-300 hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-3 font-secondary font-semibold text-sm transition-all duration-300 hover:scale-105"
               style={{ borderRadius: 0 }}
             >
               Book Session
@@ -138,7 +134,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={() => window.open('https://instagram.com/prit_digital_photo', '_blank')}
-              className="text-main hover:text-primary p-3 hover:bg-accent"
+              className="text-foreground hover:text-primary p-3 hover:bg-accent"
               style={{ borderRadius: 0 }}
             >
               <Instagram className="w-5 h-5" />
@@ -147,7 +143,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="text-main hover:text-primary p-3 hover:bg-accent"
+              className="text-foreground hover:text-primary p-3 hover:bg-accent"
               style={{ borderRadius: 0 }}
               aria-label={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
             >
@@ -156,7 +152,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="text-main p-3 z-[60]"
+              className="text-foreground p-3 z-[60]"
               style={{ borderRadius: 0 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -168,13 +164,13 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="xl:hidden fixed inset-0 top-20 bg-card z-40">
+        <div className="xl:hidden fixed inset-0 top-20 bg-background z-40">
           <nav className="flex flex-col items-center justify-center py-8 px-6 space-y-4 h-full">
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item)}
-                className="text-center text-main hover:text-primary transition-colors py-0.5 font-secondary font-medium text-lg border-b border-border rounded-none w-full"
+                className="text-center text-foreground hover:text-primary transition-colors py-0.5 font-secondary font-medium text-lg border-b border-border rounded-none w-full"
               >
                 {item.label}
               </button>
@@ -182,7 +178,7 @@ const Header = () => {
             <div className="flex flex-col space-y-4 mt-8 w-full">
               <Button
                 onClick={() => scrollToSection('contact')}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 font-secondary font-semibold"
+                className="w-full bg-primary hover:bg-primary/90 text-white py-4 font-secondary font-semibold"
                 style={{ borderRadius: 0 }}
               >
                 Book Session

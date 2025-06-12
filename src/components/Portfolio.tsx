@@ -132,7 +132,7 @@ const Carousel3D = ({ slides }) => {
                 style={{ willChange: 'transform' }}
               >
                 <div className="w-[50vw] max-w-[800px] min-w-[480px]">
-                  <div className="bg-card border border-primary/10 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
+                  <div className="bg-card border border-border overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
                     <div className="relative aspect-[16/9]">
                       <picture>
                         <source media="(max-width: 640px)" srcSet={slide.mobileSrc} />
@@ -153,11 +153,11 @@ const Carousel3D = ({ slides }) => {
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
                       >
-                        <h3 className="font-serif font-bold text-main text-xl sm:text-2xl">
+                        <h3 className="font-serif font-bold text-foreground text-xl sm:text-2xl">
                           {slide.title}
                         </h3>
                         <button
-                          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
+                          className="border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
                         >
                           {slide.button}
                         </button>
@@ -185,7 +185,7 @@ const Carousel3D = ({ slides }) => {
                 style={{ willChange: 'transform' }}
               >
                 <div className="w-[80vw] max-w-[340px]">
-                  <div className="bg-card border border-primary/10 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
+                  <div className="bg-card border border-border overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none">
                     <div className="relative aspect-[4/4]">
                       <img
                         src={slide.mobileSrc}
@@ -203,11 +203,11 @@ const Carousel3D = ({ slides }) => {
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
                       >
-                        <h3 className="font-serif font-bold text-main text-lg mb-3">
+                        <h3 className="font-serif font-bold text-foreground text-lg mb-3">
                           {slide.title}
                         </h3>
                         <button
-                          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
+                          className="border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 text-sm px-6 py-2 rounded-none border"
                         >
                           {slide.button}
                         </button>
@@ -277,10 +277,10 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-primary">
+    <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center mb-8 sm:mb-12">
-          <span className="inline-block bg-accent/20 text-primary-foreground font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
+          <span className="inline-block bg-accent text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
             Our Portfolio
           </span>
           <motion.div
@@ -289,7 +289,7 @@ const Portfolio = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-main mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4 sm:mb-6">
             Moments By Prit Photo
           </h2>
         </motion.div>

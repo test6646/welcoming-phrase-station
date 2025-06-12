@@ -46,10 +46,10 @@ const EventGallery = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-xl font-serif font-bold text-main mb-4">Event Not Found</h1>
+          <h1 className="text-xl font-serif font-bold text-foreground mb-4">Event Not Found</h1>
           <Button
             onClick={() => navigate('/events')}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-none"
+            className="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-none"
           >
             Back to Events
           </Button>
@@ -63,43 +63,43 @@ const EventGallery = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-primary text-primary-foreground py-12 lg:py-16">
+      <div className="bg-accent text-foreground py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <Button
             variant="ghost"
             onClick={() => navigate('/events')}
-            className="text-primary-foreground hover:bg-primary-foreground/20 mb-6 px-4 py-2 rounded-none"
+            className="text-foreground hover:bg-background/20 mb-6 px-4 py-2 rounded-none"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Events
           </Button>
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-primary-foreground/20 flex items-center justify-center rounded-none">
-                <IconComponent className="w-5 h-5 text-primary-foreground" />
+              <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-none">
+                <IconComponent className="w-5 h-5 text-white" />
               </div>
               <h1 className="text-2xl lg:text-3xl font-serif font-bold">{event.title}</h1>
             </div>
-            <p className="text-base text-primary-foreground/90 mb-2">{event.type}</p>
-            <p className="text-xs text-primary-foreground/80">{event.date} • {event.location}</p>
+            <p className="text-base text-muted-foreground mb-2">{event.type}</p>
+            <p className="text-xs text-muted-foreground">{event.date} • {event.location}</p>
           </div>
         </div>
       </div>
 
       {/* Event Description */}
-      <div className="py-6 bg-accent">
+      <div className="py-6 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
-          <p className="text-base text-secondary leading-relaxed">{event.description}</p>
+          <p className="text-base text-muted-foreground leading-relaxed">{event.description}</p>
         </div>
       </div>
 
       {/* Videos Section */}
       <div className="py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center text-main mb-8">Featured Videos</h2>
+          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center text-foreground mb-8">Featured Videos</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {event.videos.map((video, index) => (
-              <div key={index} className="aspect-video bg-card overflow-hidden shadow-md rounded-none">
+              <div key={index} className="aspect-video bg-card overflow-hidden shadow-md rounded-none border border-border">
                 <video
                   autoPlay
                   loop
@@ -108,7 +108,7 @@ const EventGallery = () => {
                   className="w-full h-full object-cover rounded-none"
                 >
                   <source src={video} type="video/mp4" />
-                  <div className="flex items-center justify-center h-full text-secondary">
+                  <div className="flex items-center justify-center h-full text-muted-foreground">
                     Video {index + 1}
                   </div>
                 </video>
@@ -121,14 +121,14 @@ const EventGallery = () => {
       {/* Enhanced Masonry Gallery */}
       <div className="py-12 lg:py-16 bg-accent">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center text-main mb-8">Photo Gallery</h2>
+          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center text-foreground mb-8">Photo Gallery</h2>
           {/* Desktop: Multi-column masonry layout */}
           <div className="hidden md:block">
             <div className="columns-3 lg:columns-4 gap-3 space-y-3">
               {event.images.map((image, index) => (
                 <div key={index} className="break-inside-avoid mb-3">
                   <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 rounded-none">
+                    <div className="relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 rounded-none border border-border">
                       <img
                         src={image}
                         alt={`${event.title} - ${index + 1}`}
@@ -149,7 +149,7 @@ const EventGallery = () => {
               {event.images.map((image, index) => (
                 <div key={index} className="break-inside-avoid mb-2">
                   <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 rounded-none">
+                    <div className="relative overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 rounded-none border border-border">
                       <img
                         src={image}
                         alt={`${event.title} - ${index + 1}`}
@@ -168,12 +168,12 @@ const EventGallery = () => {
       </div>
 
       {/* Contact CTA */}
-      <div className="bg-primary text-primary-foreground py-12 lg:py-16">
+      <div className="bg-accent text-foreground py-12 lg:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
           <h2 className="text-2xl lg:text-3xl font-serif font-bold mb-6">Love What You See?</h2>
           <Button
             onClick={() => navigate('/')}
-            className="bg-card text-primary hover:bg-card/90 px-6 py-3 text-base font-medium rounded-none"
+            className="bg-primary text-white hover:bg-primary/90 px-6 py-3 text-base font-medium rounded-none"
           >
             Book Your Event
           </Button>

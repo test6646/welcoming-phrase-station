@@ -135,7 +135,7 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-accent-light dark:bg-accent-light">
+    <section id="services" className="py-20 bg-accent">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -143,21 +143,21 @@ const Services: React.FC = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block bg-primary/20 text-primary font-sans font-semibold text-sm uppercase tracking-wider px-4 py-2 mb-4">
+          <span className="inline-block bg-background text-primary font-sans font-semibold text-sm uppercase tracking-wider px-4 py-2 mb-4">
             Our Services
           </span>
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-main dark:text-text-primary mb-6">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-6">
             Explore Our Photography Services
           </h2>
         </motion.div>
 
-        <div className="bg-primary dark:bg-card glass-effect shadow-lg overflow-hidden border border-border">
+        <div className="bg-background shadow-lg overflow-hidden border border-border">
           {/* Mobile Dropdown */}
           <div className="block sm:hidden p-6">
             <select
               value={activeService}
               onChange={(e) => setActiveService(e.target.value)}
-              className="w-full p-4 bg-card dark:bg-card text-main dark:text-text-primary border border-border focus:outline-none focus:ring-2 focus:ring-primary text-lg shadow-sm appearance-none cursor-pointer hover:bg-primary/5 transition-colors duration-200"
+              className="w-full p-4 bg-background text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-primary text-lg shadow-sm appearance-none cursor-pointer hover:bg-accent transition-colors duration-200"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                 backgroundPosition: 'right 0.5rem center',
@@ -170,7 +170,7 @@ const Services: React.FC = () => {
                 <option
                   key={service.id}
                   value={service.id}
-                  className="bg-card dark:bg-card text-main dark:text-text-primary py-3"
+                  className="bg-background text-foreground py-3"
                 >
                   {service.title}
                 </option>
@@ -180,7 +180,7 @@ const Services: React.FC = () => {
 
           {/* Desktop Sidebar and Content */}
           <div className="hidden sm:flex sm:flex-col lg:flex-row">
-            <div className="sm:w-full lg:w-2/5 bg-card dark:bg-card p-8 border-r border-border">
+            <div className="sm:w-full lg:w-2/5 bg-background p-8 border-r border-border">
               <nav className="space-y-3">
                 {services.map((service, index) => {
                   const IconComponent = service.icon;
@@ -190,8 +190,8 @@ const Services: React.FC = () => {
                       onClick={() => setActiveService(service.id)}
                       className={`w-full text-left p-4 flex items-center gap-3 transition-all duration-300 ${
                         activeService === service.id
-                          ? 'bg-primary text-primary-foreground shadow-md'
-                          : 'text-main dark:text-text-primary hover:bg-primary/10'
+                          ? 'bg-primary text-white shadow-md'
+                          : 'text-foreground hover:bg-accent'
                       }`}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
@@ -200,7 +200,7 @@ const Services: React.FC = () => {
                     >
                       <div
                         className={`p-2 ${
-                          activeService === service.id ? 'bg-primary-foreground/20' : 'bg-primary/10'
+                          activeService === service.id ? 'bg-white/20' : 'bg-primary/10'
                         }`}
                       >
                         <IconComponent className="w-5 h-5" />
@@ -212,7 +212,7 @@ const Services: React.FC = () => {
               </nav>
             </div>
 
-            <div className="sm:w-full lg:w-3/5 p-8">
+            <div className="sm:w-full lg:w-3/5 p-8 bg-background">
               {activeServiceData && (
                 <div className="flex flex-col">
                   <motion.div
@@ -255,7 +255,7 @@ const Services: React.FC = () => {
           </div>
 
           {/* Mobile Content - Bento Grid Layout */}
-          <div className="block sm:hidden p-6">
+          <div className="block sm:hidden p-6 bg-background">
             {activeServiceData && (
               <div className="flex flex-col space-y-4">
                 {/* Large Image - 16:9 ratio (horizontal) */}

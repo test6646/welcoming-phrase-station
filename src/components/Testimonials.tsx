@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
@@ -78,10 +77,10 @@ const Testimonials = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block bg-primary/20 text-primary font-secondary font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 sm:mb-6">
+          <span className="inline-block bg-background text-primary font-secondary font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 sm:mb-6">
             Client Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-primary font-bold text-main mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-primary font-bold text-foreground mb-4 sm:mb-6">
             What Our Clients Say
           </h2>
         </motion.div>
@@ -99,7 +98,7 @@ const Testimonials = () => {
                 exit="exit"
               >
                 <motion.div
-                  className="bg-card glass-effect p-8 sm:p-10 lg:p-12 text-center relative border border-primary/10 shadow-lg"
+                  className="bg-background p-8 sm:p-10 lg:p-12 text-center relative border border-border shadow-lg"
                   variants={cardVariants}
                   initial="initial"
                   animate="animate"
@@ -124,7 +123,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Testimonial Text */}
-                  <blockquote className="text-sm sm:text-base lg:text-lg text-main mb-6 sm:mb-8 leading-relaxed font-body max-w-2xl sm:max-w-3xl mx-auto">
+                  <blockquote className="text-sm sm:text-base lg:text-lg text-foreground mb-6 sm:mb-8 leading-relaxed font-body max-w-2xl sm:max-w-3xl mx-auto">
                     "{testimonials[currentTestimonial].text}"
                   </blockquote>
 
@@ -139,10 +138,10 @@ const Testimonials = () => {
                       transition={{ duration: 0.4 }}
                     />
                     <div className="text-center sm:text-left">
-                      <div className="font-semibold text-main text-sm sm:text-base font-secondary">
+                      <div className="font-semibold text-foreground text-sm sm:text-base font-secondary">
                         {testimonials[currentTestimonial].name}
                       </div>
-                      <div className="text-xs sm:text-sm text-secondary font-body">
+                      <div className="text-xs sm:text-sm text-muted-foreground font-body">
                         {testimonials[currentTestimonial].location}
                       </div>
                       <div className="text-xs sm:text-sm text-primary font-medium mt-1 font-accent">

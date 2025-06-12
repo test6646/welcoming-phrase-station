@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Award, Camera, Users, Star } from 'lucide-react';
 
@@ -22,20 +21,20 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-12 lg:py-20 bg-primary">
+    <section id="about" className="py-12 lg:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center mb-10 sm:mb-12">
-          <span className="inline-block bg-primary/20 text-primary font-secondary font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
+          <span className="inline-block bg-accent text-primary font-secondary font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 mb-4 rounded-none">
             About Us
           </span>
-          <h2 className="text-3xl sm:text-4xl font-primary font-bold text-main mb-4 sm:mb-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-primary font-bold text-foreground mb-4 sm:mb-6 text-center">
             Our Studio Story
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           <div className="lg:col-span-3">
-            <div className="bg-card p-8 shadow-xl h-full flex flex-col border border-primary/10" style={{ borderRadius: 0 }}>
+            <div className="bg-card p-8 shadow-xl h-full flex flex-col border border-border" style={{ borderRadius: 0 }}>
               <div className="w-full h-56 sm:h-64 lg:h-80 overflow-hidden mb-4">
                 <img
                   src="https://images.unsplash.com/photo-1515045281548-04e9c0d0e0d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -45,10 +44,10 @@ const About = () => {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-primary font-bold text-main mb-3">
+                <h3 className="text-xl font-primary font-bold text-foreground mb-3">
                   Our Journey to Excellence
                 </h3>
-                <p className="text-secondary text-sm leading-relaxed font-body">
+                <p className="text-muted-foreground text-sm leading-relaxed font-body">
                   Prit Photo has been capturing timeless moments for over 8 years. Our award-winning work reflects our passion for photography, blending creativity with tradition to create memories that last a lifetime.
                 </p>
               </div>
@@ -56,8 +55,8 @@ const About = () => {
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-card p-8 shadow-xl hover:shadow-2xl transition-all duration-300 group border border-primary/10" style={{ borderRadius: 0 }}>
-              <h3 className="text-xl font-primary font-bold text-main mb-6 text-center">
+            <div className="bg-card p-8 shadow-xl hover:shadow-2xl transition-all duration-300 group border border-border" style={{ borderRadius: 0 }}>
+              <h3 className="text-xl font-primary font-bold text-foreground mb-6 text-center">
                 Founders
               </h3>
               <div className="flex flex-row gap-6 justify-between">
@@ -72,11 +71,11 @@ const About = () => {
                           style={{ borderRadius: 0 }}
                         />
                       </div>
-                      <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground p-2" style={{ borderRadius: 0 }}>
+                      <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2" style={{ borderRadius: 0 }}>
                         <Camera className="w-5 h-5" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-secondary font-bold text-main">
+                    <h3 className="text-lg font-secondary font-bold text-foreground">
                       {owner.name}
                     </h3>
                   </div>
@@ -88,16 +87,16 @@ const About = () => {
               {achievements.map((achievement, index) => (
                 <div
                   key={index}
-                  className="bg-card p-4 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-primary/10"
+                  className="bg-card p-4 text-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-border"
                   style={{ borderRadius: 0 }}
                 >
                   <div className="text-primary mb-2">
                     <achievement.icon className="w-7 h-7 mx-auto" />
                   </div>
-                  <div className="text-2xl font-bold text-main mb-2 font-primary">
+                  <div className="text-2xl font-bold text-foreground mb-2 font-primary">
                     {achievement.number}
                   </div>
-                  <p className="text-secondary text-sm font-body">
+                  <p className="text-muted-foreground text-sm font-body">
                     {achievement.label}
                   </p>
                 </div>
